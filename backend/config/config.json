@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "20142017",
+    "database": "native-app",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
