@@ -37,6 +37,18 @@ const getUserById = async (req, res, next) => {
   }
 };
 
+const userUpDate = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { first_name, last_name, email, gender, company, city, title } = req.body;
+    const user = await userService.userUpDate({ id, first_name, last_name, email, gender, company, city, title });
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 const deleteUserById = async (req, res, next) => {
   try {
     const { id } = req.user.data;
@@ -52,5 +64,6 @@ module.exports = {
   createUser,
   getAllUsers,
   getUserById,
+  userUpDate,
   deleteUserById,
 };

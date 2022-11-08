@@ -8,19 +8,31 @@ const createUser = async (body) => {
     throw handleError('409', 'User already registered');
   }
   const newUser = await User.create(body);
-  console.log(newUser);
   return newUser;
 };
 
 const getAllUsers = async () => {
-  const allUsers = await User.findAll({ attributes: { exclude: ['password'] } });
+  const allUsers = await User.findAll();
   return allUsers;
 };
 
 const getUserById = async (id) => {
-  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+  const user = await User.findByPk(id);
   if (!user) throw handleError('404', 'User does not exist');
   return user;
+};
+
+const userUpDate = async ({ id, first_name, last_name, email, gender, company, city, title }) => {
+  const user = await User.findOne({ where: { email } });
+  if (user.dataValues.id !== Number(id)) {
+    throw handleError('401', 'Unauthorized user');
+  }
+  await User.update(
+    { first_name, last_name, email, gender, company, city, title },
+    { where: { id } },
+  );
+    const editedUser = await getUserById(id);
+    return editedUser;
 };
 
 const deleteUserById = async (id) => {
@@ -34,5 +46,6 @@ module.exports = {
   createUser,
   getAllUsers,
   getUserById,
+  userUpDate,
   deleteUserById,
 };

@@ -1,8 +1,8 @@
 const Joi = require('joi');
 
 const LOGIN = Joi.object({
+  first_name: Joi.string().required(),
   email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
 });
 
 const loginIsValid = (req, _res, next) => {
