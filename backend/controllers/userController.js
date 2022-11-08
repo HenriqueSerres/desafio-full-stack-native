@@ -1,47 +1,56 @@
 const userService = require('../services/userService');
+const generateToken = require('../utils/generateToken');
 
-const registerUser = async (req, res, next) => {
+const createUser = async (req, res, next) => {
   try {
-    const bodyContent = req.body;
-    const newUser = await userService.registerUserAdm(bodyContent);
-    return res.status(201).json(newUser);
+    const { name, email, password } = req.body;
+    const newUser = await userService.createUser(req.body);
+    console.log(newUser);
+    if (newUser) {
+      const token = generateToken(name, email, password);
+      return res.status(201).json({ token });
+    }    
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
-const getAllUsers = async (_req, res, next) => {
+const getAllUsers = async (req, res, next) => {
   try {
-    const users = await userService.getAllUsers();
-    return res.status(200).json(users);
+    const allUsers = await userService.getAllUsers();
+    return res.status(200).json(allUsers);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
-const findUser = async (req, res, next) => {
+const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await userService.findUser(id);
-    return res.status(204).end();
+    const user = await userService.getUserById(id);
+    return res.status(200).json(user);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
-const removeUser = async (req, res, next) => {
+const deleteUserById = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    await userService.removeUser(id);
+    const { id } = req.user.data;
+    await userService.deleteUserById(id);
     return res.status(204).end();
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
 module.exports = {
+  createUser,
   getAllUsers,
-  findUser,
-  removeUser,
-  registerUser,
+  getUserById,
+  deleteUserById,
 };
