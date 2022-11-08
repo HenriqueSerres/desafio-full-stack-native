@@ -1,17 +1,17 @@
 const jwt = require('jsonwebtoken');
-const extractToken = require('../utils/extractToken');
 require('dotenv').config();
+
+const senhasecreta = process.env.JWT_SECRET;
 
 const tokenIsValid = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    const jwtSuperSecret = extractToken(`${__dirname}/../../jwt.evaluation.key`);
 
     if (!token) {
       return res.status(401).json({ message: 'Token not found' });
     }    
 
-    const decoded = jwt.verify(token, jwtSuperSecret);
+    const decoded = jwt.verify(token, senhasecreta);
 
     req.user = decoded;
 
