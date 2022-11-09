@@ -26,6 +26,28 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+const countAllUsersAtCity = async (req, res, next) => {
+  try {
+    const { city } = req.body;
+    const allUsers = await userService.countAllUsersAtCity(city);
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+const getAllUsersAtCity = async (req, res, next) => {
+  try {
+    const { city } = req.body;
+    const allUsers = await userService.getAllUsersAtCity(city);
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -63,6 +85,8 @@ const deleteUserById = async (req, res, next) => {
 module.exports = {
   createUser,
   getAllUsers,
+  countAllUsersAtCity,
+  getAllUsersAtCity,
   getUserById,
   userUpDate,
   deleteUserById,

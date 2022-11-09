@@ -16,6 +16,23 @@ const getAllUsers = async () => {
   return allUsers;
 };
 
+const countAllUsersAtCity = async (city) => {
+  const { count } = await User.findAndCountAll({
+    where: {
+      city
+    },
+  });
+  const totalUsers = { city, customers_total: count }
+  return totalUsers;
+};
+
+
+const getAllUsersAtCity = async (city) => {
+  const allUsers = await User.findAll({ where: { city } });
+  
+  return allUsers;
+};
+
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
   if (!user) throw handleError('404', 'User does not exist');
@@ -23,7 +40,7 @@ const getUserById = async (id) => {
 };
 
 const userUpDate = async ({ id, first_name, last_name, email, gender, company, city, title }) => {
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({ where: { id } });
   if (user.dataValues.id !== Number(id)) {
     throw handleError('401', 'Unauthorized user');
   }
@@ -45,6 +62,8 @@ const deleteUserById = async (id) => {
 module.exports = {
   createUser,
   getAllUsers,
+  countAllUsersAtCity,
+  getAllUsersAtCity,
   getUserById,
   userUpDate,
   deleteUserById,
