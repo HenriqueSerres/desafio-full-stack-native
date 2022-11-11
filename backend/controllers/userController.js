@@ -1,35 +1,8 @@
 const userService = require('../services/userService');
-const generateToken = require('../utils/generateToken');
-
-const createUser = async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body;
-    const newUser = await userService.createUser(req.body);
-    console.log(newUser);
-    if (newUser) {
-      const token = generateToken(name, email, password);
-      return res.status(201).json({ token });
-    }    
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-
-const getAllUsers = async (req, res, next) => {
-  try {
-    const allUsers = await userService.getAllUsers();
-    return res.status(200).json(allUsers);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
 
 const countAllUsersAtCity = async (req, res, next) => {
   try {
-    const { city } = req.body;
-    const allUsers = await userService.countAllUsersAtCity(city);
+    const allUsers = await userService.countAllUsersAtCity();
     return res.status(200).json(allUsers);
   } catch (error) {
     console.log(error);
@@ -71,23 +44,9 @@ const userUpDate = async (req, res, next) => {
   }
 };
 
-const deleteUserById = async (req, res, next) => {
-  try {
-    const { id } = req.user.data;
-    await userService.deleteUserById(id);
-    return res.status(204).end();
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-
 module.exports = {
-  createUser,
-  getAllUsers,
   countAllUsersAtCity,
   getAllUsersAtCity,
   getUserById,
-  userUpDate,
-  deleteUserById,
+  userUpDate
 };
