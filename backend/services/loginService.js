@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const generateJWT = require('../utils/generateToken');
 const handleError = require('../utils/handleError');
 
 const loginUser = async (first_name, email) => {
@@ -10,7 +11,8 @@ const loginUser = async (first_name, email) => {
     throw handleError('400', 'Invalid fields');
   }
   const userData = user.dataValues;
-  const { ...tokenHeader } = userData;
+  const token = generateJWT(userData)
+  const tokenHeader = { ...userData, token };
   return tokenHeader;
 };
 
