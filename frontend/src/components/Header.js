@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Header() {
-  const [name, setName] = useState('');
-  
+  const [name, setName] = useState('');  
 
   const history = useHistory();
 
@@ -28,8 +27,7 @@ function Header() {
           onClick={ () => history.push('/user/city/total') }
         >
           Total Usuários por Cidade
-        </button>
-      
+        </button>      
         <h3>
           { name }
         </h3>
@@ -38,6 +36,7 @@ function Header() {
           onClick={ () => {
             localStorage.clear();
             history.push('/login');
+            setName('')
           } }
         >
           Sair

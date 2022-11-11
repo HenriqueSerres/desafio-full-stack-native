@@ -19,7 +19,7 @@ const fetchAPI = async (URL, token) => {
     if (response.status === HTTP_OK) return data;
     return { httpStatusCode: response.status, message: data };
   } catch (error) {
-    console.log('ERROR: Erro na função "fetchOrders"');
+    console.log('ERROR: Erro na função "fetchAPI"');
     console.log(error.message);
     return [];
   }

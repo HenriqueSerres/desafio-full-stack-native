@@ -14,7 +14,7 @@ function Login() {
   const history = useHistory();
 
   const redirectUser = () => {
-    history.push('/user');
+    history.push('/user/data/total');
   }
 
   useEffect(() => {

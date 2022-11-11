@@ -3,8 +3,7 @@ import UserProvider from './context/UserProvider';
 import { Route, Switch } from 'react-router-dom'
 import Login from './pages/Login'
 import Header from './components/Header';
-import User from './pages/User';
-// import './App.css';
+import TotalUser from './pages/TotalUser';
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path='/login' component={ Login } />
-        <Route exact path='/user' component={ User } />
+        <Route exact path='/user/city/total' component={ TotalUser } />
       </Switch>
     </UserProvider>  
   );
