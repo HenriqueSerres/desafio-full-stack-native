@@ -48,7 +48,7 @@ export const axiosRequestToken = async (u, d) => {
     .catch((err) => console.log(err));
 };
 
-export const getAxiosRequestUserCity = async () => {
+export const getAxiosRequestUserCity = async (city) => {
   const userData = await JSON.parse(localStorage.getItem('user'));
   if (!userData) return;
   const { token } = userData;
@@ -59,6 +59,9 @@ export const getAxiosRequestUserCity = async () => {
         Accept: applicationJSON,
         Authorization: token,
       },
+      data: {
+        city
+      }
     })
     .then((response) => response.data)
     .catch((err) => err);

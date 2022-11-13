@@ -5,7 +5,8 @@ function TotalUser() {
 
   const {
     totalAtCity,
-    fetchTotalUsers
+    fetchTotalUsers,
+    handleCity
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -15,9 +16,13 @@ function TotalUser() {
     <div>
       {totalAtCity &&
         totalAtCity.map((city) => (
-          <a key={ city.city }>
-            <p>{ city.city }</p>
-            <p>{ city.customers_total }</p>
+          <a
+          key={ city.city }
+          href="/user/city"
+          value={ city.city }
+          onClick={ ({ target }) => handleCity(target.value) }>
+            <p>CITY: { city.city }</p>
+            <p>TOTAL CUSTOMERS: { city.customers_total }</p>
           </a>
         ))
       }

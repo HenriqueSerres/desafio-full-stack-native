@@ -29,7 +29,13 @@ function Header() {
           Total Usuários por Cidade
         </button>      
         <h3>
-          { name }
+        {
+        name && (
+          <p>
+            { name }
+          </p>
+        )
+      }
         </h3>
         <button
           type="button"
