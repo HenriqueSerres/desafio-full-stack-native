@@ -20,7 +20,9 @@ const countAllUsersAtCity = async () => {
 };
 
 const getAllUsersAtCity = async (city) => {
-  const allUsers = await User.findAll({ where: { city } });
+  const parsedCity = city.replace('%20', ' ')
+
+  const allUsers = await User.findAll({ where: { city: parsedCity } });
   
   return allUsers;
 };
@@ -33,9 +35,7 @@ const getUserById = async (id) => {
 
 const userUpDate = async ({ id, first_name, last_name, email, gender, company, city, title }) => {
   const user = await User.findOne({ where: { id } });
-  if (user.dataValues.id !== Number(id)) {
-    throw handleError('401', 'Unauthorized user');
-  }
+  if (!user) throw handleError('404', 'User does not exist');
   await User.update(
     { first_name, last_name, email, gender, company, city, title },
     { where: { id } },

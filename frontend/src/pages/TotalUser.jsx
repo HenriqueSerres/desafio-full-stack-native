@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import UserContext from '../context/UserContext'
 
 function TotalUser() {
@@ -6,24 +7,23 @@ function TotalUser() {
   const {
     totalAtCity,
     fetchTotalUsers,
-    handleCity
   } = useContext(UserContext);
 
   useEffect(() => {
     fetchTotalUsers()
   }, []);
+
   return (
     <div>
       {totalAtCity &&
-        totalAtCity.map((city) => (
-          <a
-          key={ city.city }
-          href="/user/city"
-          value={ city.city }
-          onClick={ ({ target }) => handleCity(target.value) }>
-            <p>CITY: { city.city }</p>
-            <p>TOTAL CUSTOMERS: { city.customers_total }</p>
-          </a>
+        totalAtCity.map(({ city, customers_total }) => (
+          <Link
+          key={ city }
+          to={`/city/${city}`}
+         >
+          <p>CITY: { city }</p>
+          <p>TOTAL CUSTOMERS: { customers_total }</p>
+          </Link>
         ))
       }
     </div>

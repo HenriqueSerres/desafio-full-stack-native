@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { getAxiosRequestTotalCity, getAxiosRequestUserCity} from '../service/index';
+import { getAxiosRequestTotalCity, getAxiosRequestUserCity, getAxiosRequestUserId, putAxiosRequestUserUpdate } from '../service/index';
 import UserContext from './UserContext';
 
 function UserProvider({ children }) {
   const [totalAtCity, setTotalAtCity] = useState();
   const [usersAtCity, setUsersAtCity] = useState();
   const [city, setCity] = useState('');
+  const [user, setUser] = useState();
+  const [isLogged, setIsLogged] = useState(false);
+
+  const updateUser = async (id, body) => {
+    const data = await putAxiosRequestUserUpdate(id, body)
+    setUser(data)
+  }
 
   const fetchTotalUsers = async() => {
     const data = await getAxiosRequestTotalCity();
+
     setTotalAtCity(data);      
+  };
+
+  const fetchUser = async(id) => {  
+    const data = await getAxiosRequestUserId(id);
+    setUser(data);      
   };
 
   const fetchAllUsers = async(city) => {
@@ -23,12 +36,16 @@ function UserProvider({ children }) {
   const value = {
     totalAtCity,
     usersAtCity,
+    user,
     city,
     fetchTotalUsers,
     fetchAllUsers,
-    handleCity
+    fetchUser,
+    updateUser,
+    handleCity,
+    setIsLogged,
+    isLogged
   }
-  console.log(usersAtCity);
   return (
     <UserContext.Provider value={ value }>
       { children }

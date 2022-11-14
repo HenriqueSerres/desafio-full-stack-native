@@ -1,54 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import UserContext from '../context/UserContext';
+import classes from './Header.module.css'
+
 
 function Header() {
-  const [name, setName] = useState('');  
+  const [name, setName] = useState(''); 
+  const {
+    isLogged
+  } = useContext(UserContext); 
 
   const history = useHistory();
 
   useEffect(() => {
     const getFromLocal = JSON.parse(localStorage.getItem('user'));
     setName(getFromLocal !== null ? getFromLocal.first_name : '');
-  }, []);
+  }, [isLogged]);
   return (
-    <>
-      <div>
-        <h2>NATIVE-APP</h2>
-      </div>
-      <nav>      
-        <button
-          type="button"
-          onClick={ () => history.push('/user/city') }
-        >
-          Usuários por Cidade
-        </button>
-        <button
-          type="button"
-          onClick={ () => history.push('/user/city/total') }
-        >
-          Total Usuários por Cidade
-        </button>      
-        <h3>
-        {
-        name && (
-          <p>
+    <div className='container'>
+      <nav className={classes.head}>         
+        <div>
+          <h2 className={classes.nav}>NATIVE-APP</h2>
+        </div>
+        {isLogged && (
+          <>
+          <h3 className={classes.nav}>
             { name }
-          </p>
-        )
-      }
-        </h3>
-        <button
-          type="button"
-          onClick={ () => {
-            localStorage.clear();
-            history.push('/login');
-            setName('')
-          } }
-        >
-          Sair
-        </button>
+            </h3>
+            <button
+              className={classes.button}
+              type="button"
+              onClick={ () => {
+                localStorage.clear();
+                history.push('/login');
+                setName('')
+              } }
+            >
+              Sair
+            </button>
+          </>
+        )}
       </nav>
-    </>
+    </div>
   );
 }
 

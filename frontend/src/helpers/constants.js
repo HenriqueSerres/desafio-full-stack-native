@@ -1,12 +1,12 @@
 export const URL_LOGIN = 'http://localhost:3001/login';
 
-export const URL_USER = 'http://localhost:3001/user/:id';
+export const URL_USER = 'http://localhost:3001/user/';
 
-export const URL_EDIT_USER = 'http://localhost:3001/user/edit/:id';
+export const URL_EDIT_USER = 'http://localhost:3001/user/';
 
-export const URL_USER_CITY = 'http://localhost:3001/user/city';
+export const URL_USER_CITY = 'http://localhost:3001/city/';
 
-export const URL_TOTAL_CITY = 'http://localhost:3001/user/city/total';
+export const URL_TOTAL_CITY = 'http://localhost:3001/city';
 
 export const HTTP_UNAUTHORIZED = 401;
 

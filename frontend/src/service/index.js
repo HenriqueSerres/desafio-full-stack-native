@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { URL_USER, URL_USER_CITY, URL_TOTAL_CITY } from '../helpers/constants';
 
+
 const applicationJSON = 'application/json';
 
 const setOptions = (url, method, data) => ({
@@ -9,12 +10,12 @@ const setOptions = (url, method, data) => ({
   data,
 });
 
-export const getAxiosRequest = async () => {
+export const getAxiosRequestUserId = async (id) => {
   const userData = await JSON.parse(localStorage.getItem('user'));
   if (!userData) return;
   const { token } = userData;
   return axios
-    .get(URL_USER, {
+    .get(URL_USER+id, {
       headers: {
         'x-access-token': token,
         Accept: applicationJSON,
@@ -23,6 +24,32 @@ export const getAxiosRequest = async () => {
     })
     .then((response) => response.data)
     .catch((err) => err);
+};
+
+export const putAxiosRequestUserUpdate = async (id, body) => {
+  const userData = await JSON.parse(localStorage.getItem('user'));
+  if (!userData) return;
+  const { token } = userData;
+  return axios
+    .put(URL_USER+id, body, {
+      headers: {
+        'x-access-token': token,
+        Accept: applicationJSON,
+        Authorization: token,
+      },
+    })
+    .then((response) => response.data)
+    .catch((err) => err);
+  // return axios({
+  //   method:'put',
+  //   url: URL_USER+id,
+  //   headers: {
+  //     'x-access-token': token,
+  //     Accept: applicationJSON,
+  //     Authorization: token,
+  //   },
+    
+  // }, body)
 };
 
 export const axiosRequest = (u, m, d) => axios(setOptions(u, m, d))
@@ -53,15 +80,12 @@ export const getAxiosRequestUserCity = async (city) => {
   if (!userData) return;
   const { token } = userData;
   return axios
-    .get(URL_USER_CITY, {
+    .get(URL_USER_CITY+city, {
       headers: {
         'x-access-token': token,
         Accept: applicationJSON,
         Authorization: token,
       },
-      data: {
-        city
-      }
     })
     .then((response) => response.data)
     .catch((err) => err);

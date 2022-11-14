@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
+import { useParams, Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 
 function UsersAtCity() {
   const {
-    city,
     usersAtCity,
     fetchAllUsers
   } = useContext(UserContext);
 
+  const { city } = useParams();
   useEffect(() => {
     fetchAllUsers(city)
   }, []);
@@ -15,9 +16,9 @@ function UsersAtCity() {
     <div>
       {usersAtCity &&
         usersAtCity.map((user) => (
-          <a key={ user.id } href={`/user/${user.id}`}>
+          <Link key={ user.id } to={`/user/${user.id}`}>
             <p>{`${ user.first_name } ${ user.last_name }`}</p>
-          </a>
+          </Link>
         ))
       }
     </div>

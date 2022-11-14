@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { URL_LOGIN, MIN_LENGTH_LOGIN, HTTP_OK } from '../helpers/constants';
 import validateEmail from '../helpers/emailIsValid';
 import { axiosRequest } from '../service/index';
+import UserContext from '../context/UserContext';
+import * as S from './Login.styled'
 
 
 function Login() {
@@ -11,15 +13,20 @@ function Login() {
   const [disabledLogin, setDisabledLogin] = useState(true);
   const [verify, setVerify] = useState(false);
 
+  const {
+    setIsLogged
+  } = useContext(UserContext); 
+
   const history = useHistory();
 
   const redirectUser = () => {
-    history.push('/user/data/total');
+    history.push('/city');
   }
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData) redirectUser();
+    if (userData) return redirectUser();
+    return history.push('/login')
   }, []);
 
   useEffect(() => {
@@ -41,16 +48,18 @@ function Login() {
         response.message !== undefined
         && response.message.includes('404')
       ) return setVerify(true);
-      const { first_name, email, token } = response.data;
-      localStorage.setItem('user', JSON.stringify({ first_name, email, token }));
+      
       if (response.status === HTTP_OK) {
+        const { first_name, email, token } = response.data;
+        localStorage.setItem('user', JSON.stringify({ first_name, email, token }));
+        setIsLogged(true)
         redirectUser();
       }
     }).catch((error) => console.log(error));
   };
 
   return (
-    <>
+    <S.LoginSection>
       <form>
         <input
             placeholder="First name"
@@ -80,7 +89,7 @@ function Login() {
           </p>
         )
       }
-    </>
+    </S.LoginSection>
   )
 }
 
