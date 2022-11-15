@@ -7,14 +7,17 @@ import classes from './Header.module.css'
 function Header() {
   const [name, setName] = useState(''); 
   const {
-    isLogged
+    isLogged,
+    setIsLogged
   } = useContext(UserContext); 
 
   const history = useHistory();
 
+  console.log(isLogged);
   useEffect(() => {
-    const getFromLocal = JSON.parse(localStorage.getItem('user'));
-    setName(getFromLocal !== null ? getFromLocal.first_name : '');
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData && !isLogged) setIsLogged(true)
+    setName(userData !== null ? userData.first_name : '');
   }, [isLogged]);
   return (
     <div className='container'>
@@ -32,8 +35,9 @@ function Header() {
               type="button"
               onClick={ () => {
                 localStorage.clear();
-                history.push('/login');
                 setName('')
+                setIsLogged(false)
+                history.push('/login');
               } }
             >
               Sair

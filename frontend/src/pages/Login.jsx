@@ -60,28 +60,28 @@ function Login() {
 
   return (
     <S.LoginSection>
-      <form>
-        <input
+      <S.LoginForm>
+        <S.TextInput
             placeholder="First name"
             type="text"
             value={ userName }
             onChange={ ({ target }) => setUserName(target.value)}
         />    
-        <input
+        <S.TextInput
           placeholder="Your email"
           type="email"
           value={ userEmail }
           onChange={ ({ target }) => setUserEmail(target.value)}
         />
-        <button
+        <S.LoginButton
           type="button"
           data-testid="common_login__button-login"
           disabled={ disabledLogin }
           onClick={ () => handleClick() }
         >
           Login
-        </button>   
-      </form>
+        </S.LoginButton>   
+      </S.LoginForm>
       {
         verify && (
           <p>

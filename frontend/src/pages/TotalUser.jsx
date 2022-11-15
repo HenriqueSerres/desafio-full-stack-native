@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import UserContext from '../context/UserContext'
+import CityCards from "../components/CityCards";
+import UserContext from '../context/UserContext';
+import * as S from './TotalUser.styled'
 
 function TotalUser() {
 
@@ -14,19 +15,13 @@ function TotalUser() {
   }, []);
 
   return (
-    <div>
+    <S.CardList>
       {totalAtCity &&
         totalAtCity.map(({ city, customers_total }) => (
-          <Link
-          key={ city }
-          to={`/city/${city}`}
-         >
-          <p>CITY: { city }</p>
-          <p>TOTAL CUSTOMERS: { customers_total }</p>
-          </Link>
+          <CityCards city={ city } customers_total={customers_total} key={ city }/>
         ))
       }
-    </div>
+    </S.CardList>
   )
 }
 
