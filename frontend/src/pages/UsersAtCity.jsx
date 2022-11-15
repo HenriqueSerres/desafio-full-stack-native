@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import UserListCards from "../components/UserListCards";
 import UserContext from '../context/UserContext';
+import * as S from './UsersAtCity.styled'
 
 function UsersAtCity() {
   const {
@@ -13,15 +15,13 @@ function UsersAtCity() {
     fetchAllUsers(city)
   }, []);
   return (
-    <div>
+    <S.UserList>
       {usersAtCity &&
-        usersAtCity.map((user) => (
-          <Link key={ user.id } to={`/user/${user.id}`}>
-            <p>{`${ user.first_name } ${ user.last_name }`}</p>
-          </Link>
+        usersAtCity.map(({ id, first_name, last_name }) => (
+          <UserListCards key={id} id={id} first_name={first_name} last_name={last_name} />
         ))
       }
-    </div>
+    </S.UserList>
   )
 }
 export default UsersAtCity;

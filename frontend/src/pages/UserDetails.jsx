@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import EditUserForm from '../components/EditUserForm';
 import User from '../components/User';
 import UserContext from '../context/UserContext';
+import classes from './UserDetails.module.css'
+
 
 function UserDetails() {
   const [isEditing, setIsEditing] = useState(false)
@@ -20,9 +22,9 @@ function UserDetails() {
   }, []);
 
   return (
-    <div>
+    <div className={classes.details}>
       {isEditing ? <EditUserForm closeEdit={ handleClick } />: <User />}
-      <button onClick={ handleClick }>
+      <button className={classes.button} onClick={ handleClick }>
        {isEditing? "Cancelar Edição": "Editar Usuário"}
       </button>
     </div>

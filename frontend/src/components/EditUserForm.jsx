@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import UserContext from "../context/UserContext";
-import { PropTypes } from 'prop-types'
-
+import { PropTypes } from 'prop-types';
+import * as S from './EditUserForm.styled';
 function EditUserForm(props) {
   const {
     updateUser,
@@ -33,51 +33,44 @@ function EditUserForm(props) {
   }
 
   return (
-    <form onSubmit={ handleEdit }>
-      <label htmlFor="first_name">first name      
-        <input
+    <S.UserForm onSubmit={ handleEdit }>
+        <S.TextInput
+          placeholder="First Name"
           id="first_name"
           type='text' ref={firstName}
         />
-      </label>
-      <label htmlFor="last_name">last name      
-        <input
+        <S.TextInput
+          placeholder="Last Name"
           id="last_name"
           type='text' ref={lastName}
         />
-      </label>
-      <label htmlFor="email">email      
-        <input
+        <S.TextInput
+          placeholder="Email"
           id="email"
           type='text' ref={email}
         />
-      </label>
-      <label htmlFor="gender">gender      
-        <input
+        <S.TextInput
+          placeholder="Gender"
           id="gender"
           type='text' ref={gender}
         />
-      </label>
-      <label htmlFor="company">company      
-        <input
+        <S.TextInput
+          placeholder="Company"
           id="company"
           type='text' ref={company}
         />
-      </label>
-      <label htmlFor="city">city      
-        <input
+        <S.TextInput
+          placeholder="City"
           id="city"
           type='text' ref={city}
         />
-      </label>
-      <label htmlFor="title">title      
-        <input
+       <S.TextInput
+          placeholder="Title"
           id="title"
           type='text' ref={title}
         />
-      </label>
-      <input type="submit" value='Confirmar'/>
-    </form>
+      <S.ConfirmButton type="submit" value='Confirmar'/>
+    </S.UserForm>
   )
 }
 EditUserForm.propTypes = {
