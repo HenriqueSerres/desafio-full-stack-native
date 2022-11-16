@@ -12,6 +12,8 @@ Implementei uma API, utilizando Node.js, para consumir informações de clientes
 - Autenticação de token com JWT.
 
 ## Front-end:
+- React.js
+- Gerenciamento de estados com Context-API
 - Para estilizar, Styled Components e Bootstrap.
 - Axios para conversar com o CORS do Back-end.
 
