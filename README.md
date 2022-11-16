@@ -1,7 +1,7 @@
-# desafio-full-stack-native
+# Desafio Full Stack Native
 
 Este é um projeto realizado como desafio técnico Full Stack.
-Implementei uma API, utilizando Node.js, para consumeir informações de clientes em uma aplicação front-end, utilizando React.js.
+Implementei uma API, utilizando Node.js, para consumir informações de clientes em uma aplicação front-end, utilizando React.js.
 
 ## Back-end:
 - Banco de dados MySQL
