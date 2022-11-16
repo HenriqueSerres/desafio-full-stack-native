@@ -18,14 +18,14 @@ Implementei uma API, utilizando Node.js, para consumir informações de clientes
 # Rotas e EndPoints
 
 #### Login
-- A rota padrão (`/`) deve fazer redirecionamento para rota `/login`
+- A rota padrão (`/`) deve fazer redirecionamento para rota (`/login`)
 - Campos nescessários: `first_name` e `email`
 
 #### City
 
-- Após o usuário logar será redirecionado para a rota (`/city`) onde lista todas as cidades com o número de clientes.
+- Após o usuário logar, será redirecionado para a rota (`/city`) onde lista todas as cidades com o número de clientes.
 
-- O usuário pode escolher uma cidade para ver quais os clientes ela possui e será redirecionado para a rota (`/city/'nome da cidade'`) onde listará todos os nomes dos clientes desta cidade.
+- O usuário pode clicar em uma cidade, para ver os nomes dos clientes ela possui e será redirecionado para a rota (`/city/'nome da cidade'`) onde listará todos os nomes dos clientes desta cidade.
 
 #### User
 
@@ -50,9 +50,11 @@ Implementei uma API, utilizando Node.js, para consumir informações de clientes
 
 - `docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=123456 -d -p 3306:3306 mysql:5.7`
 
+- Nãe esqueça de configurar o arquivo `.env` com as portas e password corretos.
+
 4. Para ativar o servidor
 
-- `pm run dev`
+- `npm run dev`
 
 5. Para dropar o banco e popular novamente o banco de dados
 
