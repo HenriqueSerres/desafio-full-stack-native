@@ -76,4 +76,4 @@ Implementei uma API, utilizando Node.js, para consumir informações de clientes
 
 Para fazer a análise estática do código neste projeto, utilizei o linter [ESLint](https://eslint.org/). Assim o código estará alinhado com as boas práticas de desenvolvimento, sendo mais legível e de fácil manutenção!
 
-  
+#### Sugestões serão bem vindas!! Muito Obrigado!
